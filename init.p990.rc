@@ -2,28 +2,30 @@ import init.star.usb.rc
 
 on init
     export TMPDIR /data/local/tmp
-    export PHONE_STORAGE /mnt/emmc
-    export EXTERNAL_STORAGE /mnt/sdcard
+    export PHONE_STORAGE /storage/sdcard0 #internal_storage
+    export EXTERNAL_STORAGE /storage/sdcard1 #external_storage
 
 # Backward compatibility
     symlink /system/bin /bin
 
 # create mountpoints for storage
-    mkdir /mnt/sdcard 0000 system system
-    mkdir /mnt/emmc 0000 system system
-    symlink /mnt/sdcard /sdcard
+    mkdir /storage/sdcard1 0000 system system #external_storage
+    mkdir /storage/sdcard0 0000 system system #internal_storage
+    symlink /storage/sdcard1 /sdcard
+    symlink /storage/sdcard0 /emmc
+    symlink /storage/sdcard0 /mnt/emmc
 
 #20100722, taein.kim@lge.com, Add external security folder [START]
-    mkdir /mnt/extsecure 0700 root root
-    mkdir /mnt/extsecure/staging 0700 root root
-    mkdir /mnt/extsecure/extasec  0700 root root
+    mkdir /storage/extsecure 0700 root root
+    mkdir /storage/extsecure/staging 0700 root root
+    mkdir /storage/extsecure/extasec  0700 root root
 #20100722, taein.kim@lge.com, Add external security folder [END]
     # Secure container public mount points.
-    mkdir /mnt/asec  0700 root system
-    mount tmpfs tmpfs /mnt/asec mode=0755,gid=1000
+    mkdir /storage/asec  0700 root system
+    mount tmpfs tmpfs /storage/asec mode=0755,gid=1000
 #20100722, taein.kim@lge.com, Add external security folder [START]
-    mkdir /mnt/extasec  0700 root system
-    mount tmpfs tmpfs /mnt/extasec mode=0755,gid=1000 noatime
+    mkdir /storage/extasec  0700 root system
+    mount tmpfs tmpfs /storage/extasec mode=0755,gid=1000 noatime
 #20100722, taein.kim@lge.com, Add external security folder [END]
 
 ## ANDY_PORTING LGDRM [lg-drm@lge.com 100401]
