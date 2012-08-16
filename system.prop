@@ -12,8 +12,8 @@ mobiledata.interfaces=vsnet0,vsnet1,vsnet2,vsnet3
 dalvik.vm.dexopt-flags=m=y,u=n
 
 # Mount the internal SD card, too
-ro.additionalmounts=/mnt/emmc
-ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
+ro.additionalmounts=/storage/sdcard0
+ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
 
 # GSM, WCDMA preferred
 # This appears to be causing "Unknown" network type
