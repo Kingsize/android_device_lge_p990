@@ -9,11 +9,12 @@ on init
     symlink /system/bin /bin
 
 # create mountpoints for storage
+	mkdir /storage 0050 system sdcard_r
     mkdir /storage/sdcard1 0000 system system #external_storage
     mkdir /storage/sdcard0 0000 system system #internal_storage
     symlink /storage/sdcard1 /sdcard
     symlink /storage/sdcard1 /mnt/sdcard
-    symlink /storage/sdcard0 /emmc /mnt/emmc
+    symlink /storage/sdcard0 /emmc
     symlink /storage/sdcard0 /mnt/emmc
 
 #20100722, taein.kim@lge.com, Add external security folder [START]
@@ -38,13 +39,17 @@ on early-init
 
 on fs
 # mount partitions
-    mount_all /fstab.p990
-    # We chown/chmod /data again so because mount is run as root + defaults
-#    chown system system /data
-#    chmod 0771 /data
-#    chown system cache /cache
-#    chmod 0770 /cache
+	mount ext4 /dev/block/mmcblk0p1 /system wait
+	mount ext4 /dev/block/mmcblk0p1 /system ro noatime remount barrier=1 wait
+	# We chown/chmod /data again so because mount is run as root + defaults
+    mount ext4 /dev/block/mmcblk0p8 /data nosuid nodev noatime barrier=1 wait    
+    chown system system /data
+    chmod 0771 /data
+    mount ext4 /dev/block/mmcblk0p2 /cache nosuid nodev noatime barrier=1 wait
+    chown system cache /cache
+    chmod 0770 /cache
 
+    mount ext3 /dev/block/mmcblk0p6 /lgdrm nosuid nodev noatime
 
 on post-fs
 ## LGE
