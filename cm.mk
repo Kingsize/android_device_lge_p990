@@ -13,6 +13,8 @@ PRODUCT_NAME := cm_p990
 PRODUCT_RELEASE_NAME := Optimus2X
 PRODUCT_VERSION_DEVICE_SPECIFIC :=
 
+TARGET_BOOTANIMATION_NAME := vertical-480x800
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := p990
 
