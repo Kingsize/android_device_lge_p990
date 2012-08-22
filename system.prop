@@ -13,6 +13,12 @@ dalvik.vm.dexopt-flags=m=y,v=n,o=v,u=n
 ro.additionalmounts=/storage/sdcard0
 ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
 
+#CRT animation speed
+debug.sf.electron_frames=26
+
+#hwui blacklist
+hwui.use.blacklist=true
+
 # GSM, WCDMA preferred
 # This appears to be causing "Unknown" network type
 #ro.telephony.default_network=0
