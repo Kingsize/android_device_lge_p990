@@ -133,12 +133,10 @@ on boot
 
 ### LGE GPS
 # gps permissions
-    chown gps system /sys/devices/platform/tegra_gps_gpio/poweron
-    chown gps system /sys/devices/platform/tegra_gps_gpio/reset
-    chown gps system /dev/ttyHS3
-    chmod 0660 /dev/ttyHS3
+    chown system system /sys/devices/platform/tegra_gps_gpio/poweron
+    chown system system /sys/devices/platform/tegra_gps_gpio/reset
+    chown system system /dev/ttyHS3
     mkdir /data/gps
-    chown gps system /data/gps
     chmod 777 /data/gps
     mkdir /data/gps/var
     chmod 777 /data/gps/var
@@ -148,8 +146,8 @@ on boot
     chmod 777 /data/gps/log
     mkdir /data/cache
     chmod 777 /data/cache
-    chown gps system /system/bin/glgps
-    chown gps system /system/etc/gps_brcm_conf.xml
+    chown system system /system/bin/glgps
+    chown system system /system/etc/gps_brcm_conf.xml
     chown system system /system/etc/cert/
     chown system system /system/etc/cert/537a0176.0
     chown system system /system/etc/cert/c9dbfc2e.0
@@ -272,7 +270,7 @@ service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
     disabled
 
 service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
-    class main
-    user gps
+    class core
+    user system
     group net_raw sdcard_rw system
 
